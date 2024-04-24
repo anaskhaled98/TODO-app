@@ -1,0 +1,30 @@
+@mixin flex($direction, $gap: 0, $justify: 0, $alien: 0) {
+  display: flex;
+  flex-direction: $direction;
+  gap: $gap;
+  @if $justify != 0 {
+    justify-content: $justify;
+  }
+  @if $alien != 0 {
+    align-items: $alien;
+  }
+}
+
+@mixin buttonStyle {
+  margin-left: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--Very-Light-Gray);
+  cursor: pointer;
+}
+
+@mixin filterStyle {
+  font-family: inherit;
+  font-weight: var(--font-weight-bold);
+  border: none;
+  background-color: transparent;
+  font-size: var(--font-size-small);
+  color: var(--Dark-Grayish-Blue);
+}

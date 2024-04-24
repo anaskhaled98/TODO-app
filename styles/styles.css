@@ -1,0 +1,324 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100..700&display=swap");
+:root {
+  --font-size-small: 1.4rem;
+  --font-size-regular: 1.6rem;
+  --font-size-large: 1.8rem;
+  --font-size-xLarge: 4.2rem;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+  --default-padding: 1.6rem;
+  --timing-animation: 0.2s;
+  /* Primary */
+  --Bright-Blue: hsl(220, 98%, 61%);
+  /* Light Theme */
+  --Very-Light-Gray: hsl(0, 0%, 98%);
+  --Very-Light-Grayish-Blue: hsl(236, 33%, 92%);
+  --light-Grayish-Blue: hsl(233, 11%, 84%);
+  --Dark-Grayish-Blue: hsl(236, 9%, 61%);
+  --Very-Dark-Grayish-Blue: hsl(235, 19%, 35%);
+  /* Dark Theme */
+  --Very-Dark-Blue: hsl(235, 21%, 11%);
+  --Very-Dark-Desaturated-Blue: hsl(235, 24%, 19%);
+  --Light-Grayish-Blue: hsl(234, 39%, 85%);
+  --Light-Grayish-Blue-hover: hsl(236, 33%, 92%);
+  --Dark-Grayish-Blue: rgb(119, 122, 146);
+  --Medium-Dark-Grayish-Blue: rgb(72, 75, 106);
+  --Very-Dark-Grayish-Blue: rgb(57, 58, 76);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border-radius: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+  font-size: 1.8rem;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+  background-image: url("../images/bg-desktop-light.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: var(--Very-Light-Grayish-Blue);
+}
+
+.app__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 6.7rem auto 0;
+  max-width: 65rem;
+  width: 100%;
+  padding: var(--default-padding);
+}
+
+.DarkThemeIcone {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 2.6rem;
+  transition: all var(--timing-animation);
+}
+.DarkThemeIcone__moonImg {
+  width: 100%;
+}
+.DarkThemeIcone:hover {
+  width: 3rem;
+}
+
+.addTask {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  position: relative;
+}
+.addTask__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.addTask__label {
+  color: var(--Very-Light-Gray);
+  font-size: 3.6rem;
+  text-transform: uppercase;
+  letter-spacing: 1rem;
+  font-weight: 600;
+}
+.addTask__addContent {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  height: 6.4rem;
+  border-radius: 0.5rem;
+  padding: var(--default-padding);
+  background-color: var(--Very-Light-Gray);
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 24px 64px -22px;
+}
+.addTask__addContent::before, .addTask__addContent::after {
+  content: "";
+  position: absolute;
+  width: 2.7rem;
+  height: 2.7rem;
+  border-radius: 50%;
+  left: 2.5rem;
+  top: 1.85rem;
+  transition: all var(--timing-animation);
+}
+.addTask__addContent::before {
+  background-image: linear-gradient(var(--Light-Grayish-Blue), var(--Light-Grayish-Blue));
+}
+.addTask__addContent::after {
+  opacity: 0;
+  background-image: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+.addTask__addContent:has(.addTask__input:focus)::before {
+  opacity: 0;
+}
+.addTask__addContent:has(.addTask__input:focus)::after {
+  opacity: 1;
+}
+.addTask__button {
+  margin-left: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--Very-Light-Gray);
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+.addTask__button:active {
+  background-image: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+.addTask__button:active .addTask__buttonImg {
+  opacity: 1;
+}
+.addTask__buttonImg {
+  width: 50%;
+  opacity: 0;
+}
+.addTask__input {
+  border: none;
+  padding: var(--default-padding);
+  flex: 1;
+  font-size: var(--font-size-large);
+  background-color: transparent;
+  color: var(--Very-Dark-Desaturated-Blue);
+  font-family: "Josefin Sans", sans-serif;
+  outline: none;
+  caret-color: var(--Bright-Blue);
+}
+
+.taskList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-radius: 0.5rem;
+  background-color: var(--Very-Light-Gray);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 24px 64px -22px;
+}
+.taskList__list {
+  list-style: none;
+}
+.taskList__taskContent {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+  height: 6.4rem;
+  position: relative;
+  padding: var(--default-padding);
+  cursor: pointer;
+  border-bottom: 0.1rem solid var(--Very-Light-Grayish-Blue);
+}
+.taskList__taskContent:hover .taskList__deleteIcon {
+  opacity: 1;
+}
+.taskList__taskContent:hover::before {
+  opacity: 0;
+}
+.taskList__taskContent:hover::after {
+  opacity: 1;
+}
+.taskList__taskContent::before, .taskList__taskContent::after {
+  content: "";
+  position: absolute;
+  width: 2.7rem;
+  height: 2.7rem;
+  border-radius: 50%;
+  left: 2.5rem;
+  top: 1.8rem;
+  transition: all var(--timing-animation);
+}
+.taskList__taskContent::before {
+  background-image: linear-gradient(var(--Light-Grayish-Blue), var(--Light-Grayish-Blue));
+}
+.taskList__taskContent::after {
+  opacity: 0;
+  background-image: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+.taskList__taskContent--isCompleted .taskList__value {
+  color: var(--Light-Grayish-Blue);
+  text-decoration-line: line-through;
+}
+.taskList__taskContent--isCompleted .taskList__checkbox {
+  background-image: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+.taskList__taskContent--isCompleted .taskList__checkboxImg {
+  opacity: 1;
+}
+.taskList__checkbox {
+  margin-left: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--Very-Light-Gray);
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+.taskList__checkboxImg {
+  opacity: 0;
+}
+.taskList__valueContent {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+}
+.taskList__value {
+  color: var(--Medium-Dark-Grayish-Blue);
+}
+.taskList__deleteIcon {
+  opacity: 0;
+  transition: all var(--timing-animation);
+}
+.taskList__deleteIcon:hover {
+  transform: scale(1.2);
+}
+
+.listOptions {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.6rem;
+  padding-left: 2.6rem;
+}
+.listOptions p {
+  font-size: var(--font-size-small);
+  color: var(--Dark-Grayish-Blue);
+}
+.listOptions__filters {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+.listOptions__filter, .listOptions__deleteButton {
+  font-family: inherit;
+  font-weight: var(--font-weight-bold);
+  border: none;
+  background-color: transparent;
+  font-size: var(--font-size-small);
+  color: var(--Dark-Grayish-Blue);
+  cursor: pointer;
+}
+.listOptions__filter:hover, .listOptions__deleteButton:hover {
+  color: var(--Medium-Dark-Grayish-Blue);
+}
+.listOptions__deleteButton {
+  font-weight: var(--font-weight-regular);
+}
+.listOptions .active {
+  color: var(--Bright-Blue);
+}
+.listOptions .active:hover {
+  color: var(--Bright-Blue);
+}
+
+@media (max-width: 900px) {
+  .app {
+    background-size: 140rem;
+  }
+}
+@media (max-width: 650px) {
+  .App__wrapper {
+    margin: 3.5rem auto 0;
+    padding: 2.5rem;
+  }
+}
+@media (max-width: 500px) {
+  .listOptions {
+    position: relative;
+  }
+  .listOptions__filters {
+    position: absolute;
+    top: 140%;
+    left: 0;
+    border-radius: 0.5rem;
+    background-color: var(--Very-Light-Gray);
+    width: 100%;
+    justify-content: center;
+    padding: var(--default-padding);
+  }
+}/*# sourceMappingURL=styles.css.map */

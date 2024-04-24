@@ -1,0 +1,345 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100..700&display=swap");
+@import "./components/mixins.scss";
+
+:root {
+  --font-size-small: 1.4rem;
+  --font-size-regular: 1.6rem;
+  --font-size-large: 1.8rem;
+  --font-size-xLarge: 4.2rem;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+  --default-padding: 1.6rem;
+  --timing-animation: 0.2s;
+  /* Primary */
+  --Bright-Blue: hsl(220, 98%, 61%);
+  /* Light Theme */
+  --Very-Light-Gray: hsl(0, 0%, 98%);
+  --Very-Light-Grayish-Blue: hsl(236, 33%, 92%);
+  --light-Grayish-Blue: hsl(233, 11%, 84%);
+  --Dark-Grayish-Blue: hsl(236, 9%, 61%);
+  --Very-Dark-Grayish-Blue: hsl(235, 19%, 35%);
+  /* Dark Theme */
+  --Very-Dark-Blue: hsl(235, 21%, 11%);
+  --Very-Dark-Desaturated-Blue: hsl(235, 24%, 19%);
+  --Light-Grayish-Blue: hsl(234, 39%, 85%);
+  --Light-Grayish-Blue-hover: hsl(236, 33%, 92%);
+  --Dark-Grayish-Blue: rgb(119, 122, 146);
+  --Medium-Dark-Grayish-Blue: rgb(72, 75, 106);
+  --Very-Dark-Grayish-Blue: rgb(57, 58, 76);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border-radius: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+  font-size: 1.8rem;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+  background-image: url("../images/bg-desktop-light.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: var(--Very-Light-Grayish-Blue);
+}
+
+.app__wrapper {
+  @include flex(column, 2rem);
+  margin: 6.7rem auto 0;
+  max-width: 65rem;
+  width: 100%;
+  padding: var(--default-padding);
+}
+
+.DarkThemeIcone {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 2.6rem;
+  transition: all var(--timing-animation);
+
+  &__moonImg {
+    width: 100%;
+  }
+
+  &:hover {
+    width: 3rem;
+  }
+}
+
+.addTask {
+  @include flex(column, 3rem);
+  position: relative;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__label {
+    color: var(--Very-Light-Gray);
+    font-size: 3.6rem;
+    text-transform: uppercase;
+    letter-spacing: 1rem;
+    font-weight: 600;
+  }
+
+  &__addContent {
+    @include flex(row, 1rem, 0, center);
+    height: 6.4rem;
+    border-radius: 0.5rem;
+    padding: var(--default-padding);
+    background-color: var(--Very-Light-Gray);
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 24px 64px -22px;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 2.7rem;
+      height: 2.7rem;
+      border-radius: 50%;
+      left: 2.5rem;
+      top: 1.85rem;
+      transition: all var(--timing-animation);
+    }
+
+    &::before {
+      background-image: linear-gradient(
+        var(--Light-Grayish-Blue),
+        var(--Light-Grayish-Blue)
+      );
+    }
+
+    &::after {
+      opacity: 0;
+      background-image: linear-gradient(
+        hsl(192, 100%, 67%),
+        hsl(280, 87%, 65%)
+      );
+    }
+
+    &:has(.addTask__input:focus)::before {
+      opacity: 0;
+    }
+    &:has(.addTask__input:focus)::after {
+      opacity: 1;
+    }
+  }
+
+  &__button {
+    @include buttonStyle;
+    position: relative;
+    z-index: 1;
+
+    &:active {
+      background-image: linear-gradient(
+        hsl(192, 100%, 67%),
+        hsl(280, 87%, 65%)
+      );
+
+      .addTask__buttonImg {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__buttonImg {
+    width: 50%;
+    opacity: 0;
+  }
+
+  &__input {
+    border: none;
+    padding: var(--default-padding);
+    flex: 1;
+    font-size: var(--font-size-large);
+    background-color: transparent;
+    color: var(--Very-Dark-Desaturated-Blue);
+    font-family: "Josefin Sans", sans-serif;
+    outline: none;
+    caret-color: var(--Bright-Blue);
+  }
+}
+
+.taskList {
+  @include flex(column);
+  border-radius: 0.5rem;
+  background-color: var(--Very-Light-Gray);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 24px 64px -22px;
+
+  &__list {
+    list-style: none;
+  }
+
+  &__taskContent {
+    @include flex(row, 2rem, 0, center);
+    height: 6.4rem;
+    position: relative;
+    padding: var(--default-padding);
+    cursor: pointer;
+    border-bottom: 0.1rem solid var(--Very-Light-Grayish-Blue);
+
+    &:hover {
+      .taskList__deleteIcon {
+        opacity: 1;
+      }
+
+      &::before {
+        opacity: 0;
+      }
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 2.7rem;
+      height: 2.7rem;
+      border-radius: 50%;
+      left: 2.5rem;
+      top: 1.8rem;
+      transition: all var(--timing-animation);
+    }
+
+    &::before {
+      background-image: linear-gradient(
+        var(--Light-Grayish-Blue),
+        var(--Light-Grayish-Blue)
+      );
+    }
+    &::after {
+      opacity: 0;
+      background-image: linear-gradient(
+        hsl(192, 100%, 67%),
+        hsl(280, 87%, 65%)
+      );
+    }
+
+    &--isCompleted {
+      .taskList__value {
+        color: var(--Light-Grayish-Blue);
+        text-decoration-line: line-through;
+      }
+      .taskList__checkbox {
+        background-image: linear-gradient(
+          hsl(192, 100%, 67%),
+          hsl(280, 87%, 65%)
+        );
+      }
+      .taskList__checkboxImg {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__checkbox {
+    @include buttonStyle;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__checkboxImg {
+    opacity: 0;
+  }
+
+  &__valueContent {
+    @include flex(row, 1rem, space-between, center);
+    flex: 1;
+  }
+
+  &__value {
+    color: var(--Medium-Dark-Grayish-Blue);
+  }
+
+  &__deleteIcon {
+    opacity: 0;
+    transition: all var(--timing-animation);
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.listOptions {
+  @include flex(row, 0, space-between, center);
+  padding: 1.6rem;
+  padding-left: 2.6rem;
+
+  p {
+    font-size: var(--font-size-small);
+    color: var(--Dark-Grayish-Blue);
+  }
+
+  &__filters {
+    @include flex(row, 2rem, space-between, center);
+  }
+
+  &__filter,
+  &__deleteButton {
+    @include filterStyle;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--Medium-Dark-Grayish-Blue);
+    }
+  }
+
+  &__deleteButton {
+    font-weight: var(--font-weight-regular);
+  }
+  .active {
+    color: var(--Bright-Blue);
+    &:hover {
+      color: var(--Bright-Blue);
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .app {
+    background-size: 140rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .App__wrapper {
+    margin: 3.5rem auto 0;
+    padding: 2.5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .listOptions {
+    position: relative;
+  }
+
+  .listOptions__filters {
+    position: absolute;
+    top: 140%;
+    left: 0;
+    border-radius: 0.5rem;
+    background-color: var(--Very-Light-Gray);
+    width: 100%;
+    justify-content: center;
+    padding: var(--default-padding);
+  }
+}

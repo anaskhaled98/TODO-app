@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <title>Frontend Mentor | Todo app</title>
+  </head>
+  <body>
+    <main class="app">
+      <div class="app__wrapper">
+        <section class="addTask">
+          <header class="addTask__header">
+            <label for="add-input" class="addTask__label">todo</label>
+            <button class="DarkThemeIcone">
+              <img
+                src="./images/icon-moon.svg"
+                alt="dark theme"
+                class="DarkThemeIcone__moonImg"
+              />
+            </button>
+          </header>
+          <form class="addTask__addContent">
+            <button class="addTask__button">
+              <img
+                src="./images/icon-check.svg"
+                alt="add-icon"
+                class="addTask__buttonImg"
+              />
+            </button>
+            <input
+              type="text"
+              class="addTask__input"
+              id="add-input"
+              placeholder="Create a new todo..."
+            />
+          </form>
+        </section>
+        <section class="taskList">
+          <ul class="taskList__list">
+            <li
+              class="taskList__taskContent taskList__taskContent--isCompleted"
+            >
+              <button class="taskList__checkbox">
+                <img
+                  src="./images/icon-check.svg"
+                  alt="check-icon"
+                  class="taskList__checkboxImg"
+                />
+              </button>
+              <div class="taskList__valueContent">
+                <p class="taskList__value">Lorem ipsum dolor sit amet</p>
+                <img
+                  src="./images/icon-cross.svg"
+                  alt="basket-icon"
+                  class="taskList__deleteIcon"
+                />
+              </div>
+            </li>
+            <li class="taskList__taskContent">
+              <button class="taskList__checkbox">
+                <img
+                  src="./images/icon-check.svg"
+                  alt="check-icon"
+                  class="taskList__checkboxImg"
+                />
+              </button>
+              <div class="taskList__valueContent">
+                <p class="taskList__value">Lorem ipsum dolor sit amet</p>
+                <img
+                  src="./images/icon-cross.svg"
+                  alt="basket-icon"
+                  class="taskList__deleteIcon"
+                />
+              </div>
+            </li>
+            <li class="taskList__taskContent">
+              <button class="taskList__checkbox">
+                <img
+                  src="./images/icon-check.svg"
+                  alt="check-icon"
+                  class="taskList__checkboxImg"
+                />
+              </button>
+              <div class="taskList__valueContent">
+                <p class="taskList__value">Lorem ipsum dolor sit amet</p>
+                <img
+                  src="./images/icon-cross.svg"
+                  alt="basket-icon"
+                  class="taskList__deleteIcon"
+                />
+              </div>
+            </li>
+          </ul>
+          <div class="listOptions">
+            <p><span class="listOptions__counter">0</span> items left</p>
+            <div class="listOptions__filters">
+              <button class="listOptions__filter allButton">All</button>
+              <button class="listOptions__filter activeButton">Active</button>
+              <button class="listOptions__filter completedButton active">
+                Completed
+              </button>
+            </div>
+            <button class="listOptions__deleteButton">Clear Completed</button>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
