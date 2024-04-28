@@ -297,6 +297,14 @@ body {
   color: var(--Bright-Blue);
 }
 
+.emptyList {
+  margin-top: 1rem;
+  padding: var(--default-padding);
+  text-align: center;
+  font-size: var(--font-size-Large);
+  color: var(--Dark-Grayish-Blue);
+}
+
 @media (max-width: 900px) {
   .app {
     background-size: 140rem;

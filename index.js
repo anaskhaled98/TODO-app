@@ -5,20 +5,24 @@ TODO
 - Tasks
         [x] saveToDB
         [x] fetchData
-        [ ] initDataAtStartup
-        [ ] initTaskList
+        [x] initDataAtStartup
+        [x] initTaskList
         [x] renderTasklist
         [x] addTask
-        [ ] deleteTask
+        [x] deleteTask
         [ ] toggleTask
-        [ ] toggleCompletedTask
-        [ ] Empty State
-        [ ] Filters
+        [ ] toggleCompletedTasks
+        [x] Empty State
+        [ ] toggleAllTasks
+        [ ] toggleActiveTasks
         [ ] Clear completed
+        [ ] Count tasks
         [ ] Drag and Drop
 */
 
-import { addBtn, inputElement, tasksList } from './scripts/elements';
+import {
+  addBtn, deleteBtns, inputElement, taskList,
+} from './scripts/elements';
 
 const addTask = (e) => {
   e.preventDefault();
@@ -35,7 +39,7 @@ const addTask = (e) => {
 
   saveToDB('tasks', tasks);
 
-  renderTasklist(tasks);
+  initTaskList(tasks);
 };
 
 const renderTasklist = (tasks) => {
@@ -61,7 +65,7 @@ const renderTasklist = (tasks) => {
             </div>
         `;
   });
-  tasksList.innerHTML = result;
+  taskList.innerHTML = result;
   inputElement.value = '';
 };
 
@@ -74,4 +78,39 @@ const saveToDB = (key, data) => {
   localStorage.setItem(key, JSON.stringify(data));
 };
 
+const initDataAtStartup = () => {
+  initTaskList(fetchData('tasks'));
+};
+
+const renderEmptyState = () => {
+  taskList.innerHTML = '<p class="emptyList">Empty List...</p>';
+};
+
+const initTaskList = (tasks) => {
+  if (tasks.length) {
+    renderTasklist(tasks);
+    initTaskListener();
+  } else {
+    renderEmptyState();
+  }
+};
+
+const deleteTask = (index) => {
+  const tasks = fetchData('tasks');
+  tasks.splice(index, 1);
+  saveToDB('tasks', tasks);
+
+  initTaskList(tasks);
+};
+
+const initTaskListener = () => {
+  deleteBtns().forEach((element, index) => {
+    element.addEventListener('click', () => {
+      deleteTask(index);
+    });
+  });
+};
+
 addBtn.addEventListener('click', addTask);
+
+initDataAtStartup();
