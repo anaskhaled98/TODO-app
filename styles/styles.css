@@ -188,10 +188,10 @@ body {
 .taskList__taskContent:hover .taskList__deleteIcon {
   opacity: 1;
 }
-.taskList__taskContent:hover::before {
+.taskList__taskContent:hover:has(.taskList__checkbox:hover)::before {
   opacity: 0;
 }
-.taskList__taskContent:hover::after {
+.taskList__taskContent:hover:has(.taskList__checkbox:hover)::after {
   opacity: 1;
 }
 .taskList__taskContent::before, .taskList__taskContent::after {
@@ -205,6 +205,7 @@ body {
   transition: all var(--timing-animation);
 }
 .taskList__taskContent::before {
+  opacity: 1;
   background-image: linear-gradient(var(--Light-Grayish-Blue), var(--Light-Grayish-Blue));
 }
 .taskList__taskContent::after {

@@ -199,10 +199,10 @@ body {
         opacity: 1;
       }
 
-      &::before {
+      &:has(.taskList__checkbox:hover)::before {
         opacity: 0;
       }
-      &::after {
+      &:has(.taskList__checkbox:hover)::after {
         opacity: 1;
       }
     }
@@ -220,6 +220,7 @@ body {
     }
 
     &::before {
+      opacity: 1;
       background-image: linear-gradient(
         var(--Light-Grayish-Blue),
         var(--Light-Grayish-Blue)
