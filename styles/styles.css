@@ -212,9 +212,15 @@ body {
   opacity: 0;
   background-image: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
 }
+.taskList__list--hideActive .taskList__taskContent:not(.taskList__taskContent--isCompleted) {
+  display: none;
+}
 .taskList__taskContent--isCompleted .taskList__value {
   color: var(--Light-Grayish-Blue);
   text-decoration-line: line-through;
+}
+.taskList__list--hideCompleted .taskList__taskContent--isCompleted {
+  display: none;
 }
 .taskList__taskContent--isCompleted .taskList__checkbox {
   background-image: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
@@ -298,11 +304,12 @@ body {
 }
 
 .emptyList {
-  margin-top: 1rem;
+  height: 6.3rem;
   padding: var(--default-padding);
   text-align: center;
   font-size: var(--font-size-Large);
   color: var(--Dark-Grayish-Blue);
+  border: 0.1rem solid var(--Very-Light-Grayish-Blue);
 }
 
 @media (max-width: 900px) {

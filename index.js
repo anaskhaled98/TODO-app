@@ -10,18 +10,26 @@ TODO
         [x] renderTasklist
         [x] addTask
         [x] deleteTask
-        [ ] toggleTask
-        [ ] toggleCompletedTasks
         [x] Empty State
-        [ ] toggleAllTasks
-        [ ] toggleActiveTasks
-        [ ] Clear completed
-        [ ] Count tasks
+        [x] toggleTask
+        [x] toggleCompletedTasks
+        [x] toggleAllTasks
+        [x] toggleActiveTasks
+        [x] Clear completed
+        [x] Count tasks
         [ ] Drag and Drop
+        [ ] Refactor
 */
 
 import {
-  addBtn, deleteBtns, inputElement, taskList,
+  addBtn,
+  checkBtns,
+  clearBtn,
+  counterBtn,
+  deleteBtns,
+  filterBtns,
+  inputElement,
+  taskList,
 } from './scripts/elements';
 
 const addTask = (e) => {
@@ -31,9 +39,12 @@ const addTask = (e) => {
 
   const task = {
     value: taskValue,
+    isCompleted: false,
   };
 
   const tasks = fetchData('tasks') || [];
+
+  countingTasks('increase');
 
   tasks.push(task);
 
@@ -42,11 +53,19 @@ const addTask = (e) => {
   initTaskList(tasks);
 };
 
+const countingTasks = (state) => {
+  let counter = fetchData('counter') || 0;
+  if (state == 'increase') counter++;
+  else if (state == 'decrease') counter--;
+  counterBtn.innerHTML = `${counter}`;
+  saveToDB('counter', counter);
+};
+
 const renderTasklist = (tasks) => {
   let result = '';
   tasks.forEach((task) => {
     result += `<li
-          class="taskList__taskContent"
+          class="taskList__taskContent ${task.isCompleted ? 'taskList__taskContent--isCompleted' : ''}"
           >
             <button class="taskList__checkbox">
               <img
@@ -80,6 +99,7 @@ const saveToDB = (key, data) => {
 
 const initDataAtStartup = () => {
   initTaskList(fetchData('tasks'));
+  countingTasks();
 };
 
 const renderEmptyState = () => {
@@ -97,11 +117,41 @@ const initTaskList = (tasks) => {
 
 const deleteTask = (index) => {
   const tasks = fetchData('tasks');
+  if (!tasks[index].isCompleted) countingTasks('decrease');
   tasks.splice(index, 1);
   saveToDB('tasks', tasks);
-
   initTaskList(tasks);
 };
+
+const toggleTask = (element, index) => {
+  const tasks = fetchData('tasks');
+  element.parentElement.classList.toggle('taskList__taskContent--isCompleted');
+  tasks[index].isCompleted = !tasks[index].isCompleted;
+  saveToDB('tasks', tasks);
+  (tasks[index].isCompleted) ? countingTasks('decrease') : countingTasks('increase');
+};
+
+const filterTasks = (button) => {
+  document.querySelector('.active').classList.remove('active');
+  button.classList.add('active');
+  const styles = button.classList;
+  if (styles.contains('allButton')) taskList.classList = 'taskList__list';
+  else if (styles.contains('activeButton')) taskList.classList = 'taskList__list taskList__list--hideCompleted';
+  else if (styles.contains('completedButton')) taskList.classList = 'taskList__list taskList__list--hideActive';
+};
+
+const clearCompletedTasks = () => {
+  let tasks = fetchData('tasks');
+  tasks = tasks.filter((task) => !task.isCompleted);
+  saveToDB('tasks', tasks);
+  initTaskList(tasks);
+};
+
+filterBtns.forEach((button) => {
+  button.addEventListener('click', () => {
+    filterTasks(button);
+  });
+});
 
 const initTaskListener = () => {
   deleteBtns().forEach((element, index) => {
@@ -109,8 +159,16 @@ const initTaskListener = () => {
       deleteTask(index);
     });
   });
+
+  checkBtns().forEach((element, index) => {
+    element.addEventListener('click', () => {
+      toggleTask(element, index);
+    });
+  });
 };
 
 addBtn.addEventListener('click', addTask);
+
+clearBtn.addEventListener('click', clearCompletedTasks);
 
 initDataAtStartup();

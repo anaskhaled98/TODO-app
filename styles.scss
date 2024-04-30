@@ -234,11 +234,22 @@ body {
       );
     }
 
+    &:not(.taskList__taskContent--isCompleted) {
+      .taskList__list--hideActive & {
+        display: none;
+      }
+    }
+
     &--isCompleted {
       .taskList__value {
         color: var(--Light-Grayish-Blue);
         text-decoration-line: line-through;
       }
+
+      .taskList__list--hideCompleted & {
+        display: none;
+      }
+
       .taskList__checkbox {
         background-image: linear-gradient(
           hsl(192, 100%, 67%),
@@ -316,11 +327,12 @@ body {
 }
 
 .emptyList {
-  margin-top: 1rem;
+  height: 6.3rem;
   padding: var(--default-padding);
   text-align: center;
   font-size: var(--font-size-Large);
   color: var(--Dark-Grayish-Blue);
+  border: 0.1rem solid var(--Very-Light-Grayish-Blue);
 }
 
 @media (max-width: 900px) {
