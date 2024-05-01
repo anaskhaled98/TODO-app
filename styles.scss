@@ -364,3 +364,11 @@ body {
     padding: var(--default-padding);
   }
 }
+
+.dragging {
+  opacity: 0.6;
+  background-color: var(--Very-Light-Grayish-Blue);
+}
+.dragging :where(.taskList__valueContent, button) {
+  opacity: 0;
+}

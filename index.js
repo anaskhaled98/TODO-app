@@ -17,7 +17,7 @@ TODO
         [x] toggleActiveTasks
         [x] Clear completed
         [x] Count tasks
-        [ ] Drag and Drop
+        [x] Drag and Drop
         [ ] Refactor
 */
 
@@ -30,6 +30,7 @@ import {
   filterBtns,
   inputElement,
   taskList,
+  tasks,
 } from './scripts/elements';
 
 const addTask = (e) => {
@@ -66,6 +67,7 @@ const renderTasklist = (tasks) => {
   tasks.forEach((task) => {
     result += `<li
           class="taskList__taskContent ${task.isCompleted ? 'taskList__taskContent--isCompleted' : ''}"
+          draggable = "true"
           >
             <button class="taskList__checkbox">
               <img
@@ -147,6 +149,14 @@ const clearCompletedTasks = () => {
   initTaskList(tasks);
 };
 
+const initTaskListDragging = (e) => {
+  e.preventDefault();
+  const draggingItem = taskList.querySelector('.dragging');
+  const siblings = [...taskList.querySelectorAll('.taskList__taskContent:not(.dragging)')];
+  const nextSibling = siblings.find((sibling) => e.clientY <= sibling.offsetTop + sibling.offsetHeight / 2);
+  taskList.insertBefore(draggingItem, nextSibling);
+};
+
 filterBtns.forEach((button) => {
   button.addEventListener('click', () => {
     filterTasks(button);
@@ -165,6 +175,13 @@ const initTaskListener = () => {
       toggleTask(element, index);
     });
   });
+
+  tasks().forEach((task) => {
+    task.addEventListener('dragstart', () => setTimeout(() => task.classList.add('dragging'), 0));
+    task.addEventListener('dragend', () => task.classList.remove('dragging'));
+  });
+
+  taskList.addEventListener('dragover', initTaskListDragging);
 };
 
 addBtn.addEventListener('click', addTask);
