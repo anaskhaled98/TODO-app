@@ -27,6 +27,7 @@ import {
   clearBtn,
   counterBtn,
   deleteBtns,
+  dragDropMessage,
   filterBtns,
   inputElement,
   taskList,
@@ -75,6 +76,8 @@ const renderTasklist = (tasks) => {
                 alt="check-icon"
                 class="taskList__checkboxImg"
               />
+
+            
             </button>
             <div class="taskList__valueContent">
               <p class="taskList__value">${task.value}</p>
@@ -115,6 +118,7 @@ const initTaskList = (tasks) => {
   } else {
     renderEmptyState();
   }
+  (tasks.length > 1) ? dragDropMessage.classList.remove('hide') : dragDropMessage.classList.add('hide');
 };
 
 const deleteTask = (index) => {

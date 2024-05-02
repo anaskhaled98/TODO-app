@@ -10,6 +10,7 @@
       sizes="32x32"
       href="./images/favicon-32x32.png"
     />
+    <link rel="stylesheet" href="./styles/all.min.css" />
     <link rel="stylesheet" href="./styles/styles.css" />
     <title>Frontend Mentor | Todo app</title>
   </head>
@@ -29,11 +30,7 @@
           </header>
           <form class="addTask__addContent">
             <button class="addTask__button">
-              <img
-                src="./images/icon-check.svg"
-                alt="add-icon"
-                class="addTask__buttonImg"
-              />
+              <i class="fa-solid fa-plus addTask__buttonImg"></i>
             </button>
             <input
               type="text"
@@ -58,6 +55,7 @@
             </div>
             <button class="listOptions__deleteButton">Clear Completed</button>
           </div>
+          <p class="dragDropMessage hide">Drag and drop to reorder list</p>
         </section>
       </div>
     </main>

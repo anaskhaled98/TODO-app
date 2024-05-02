@@ -105,62 +105,24 @@ body {
     background-color: var(--Very-Light-Gray);
     position: relative;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 24px 64px -22px;
-
-    &::before,
-    &::after {
-      content: "";
-      position: absolute;
-      width: 2.7rem;
-      height: 2.7rem;
-      border-radius: 50%;
-      left: 2.5rem;
-      top: 1.85rem;
-      transition: all var(--timing-animation);
-    }
-
-    &::before {
-      background-image: linear-gradient(
-        var(--Light-Grayish-Blue),
-        var(--Light-Grayish-Blue)
-      );
-    }
-
-    &::after {
-      opacity: 0;
-      background-image: linear-gradient(
-        hsl(192, 100%, 67%),
-        hsl(280, 87%, 65%)
-      );
-    }
-
-    &:has(.addTask__input:focus)::before {
-      opacity: 0;
-    }
-    &:has(.addTask__input:focus)::after {
-      opacity: 1;
-    }
   }
 
   &__button {
     @include buttonStyle;
     position: relative;
     z-index: 1;
-
-    &:active {
-      background-image: linear-gradient(
-        hsl(192, 100%, 67%),
-        hsl(280, 87%, 65%)
-      );
-
-      .addTask__buttonImg {
-        opacity: 1;
-      }
-    }
   }
 
   &__buttonImg {
-    width: 50%;
-    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 10%;
+    font-size: 2.5rem;
+    color: var(--Bright-Blue);
+    transition: var(--timing-animation);
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 
   &__input {
@@ -181,6 +143,7 @@ body {
   border-radius: 0.5rem;
   background-color: var(--Very-Light-Gray);
   box-shadow: rgba(0, 0, 0, 0.2) 0px 24px 64px -22px;
+  position: relative;
 
   &__list {
     list-style: none;
@@ -295,6 +258,7 @@ body {
   @include flex(row, 0, space-between, center);
   padding: 1.6rem;
   padding-left: 2.6rem;
+  position: relative;
 
   p {
     font-size: var(--font-size-small);
@@ -335,6 +299,30 @@ body {
   border: 0.1rem solid var(--Very-Light-Grayish-Blue);
 }
 
+.dragging {
+  opacity: 0.6;
+  background-color: var(--Very-Light-Grayish-Blue);
+}
+
+.dragging :where(.taskList__valueContent, button) {
+  opacity: 0;
+}
+
+.dragDropMessage {
+  opacity: 1;
+  transition: 2s;
+  position: absolute;
+  font-size: var(--font-size-small);
+  color: var(--Dark-Grayish-Blue);
+  bottom: -7rem;
+  left: 50%;
+  transform: translatex(-55%);
+}
+
+.dragDropMessage.hide {
+  opacity: 0;
+}
+
 @media (max-width: 900px) {
   .app {
     background-size: 140rem;
@@ -349,10 +337,6 @@ body {
 }
 
 @media (max-width: 500px) {
-  .listOptions {
-    position: relative;
-  }
-
   .listOptions__filters {
     position: absolute;
     top: 140%;
@@ -363,12 +347,9 @@ body {
     justify-content: center;
     padding: var(--default-padding);
   }
-}
 
-.dragging {
-  opacity: 0.6;
-  background-color: var(--Very-Light-Grayish-Blue);
-}
-.dragging :where(.taskList__valueContent, button) {
-  opacity: 0;
+  .dragDropAlarm {
+    bottom: -12rem;
+    transform: translatex(-50%);
+  }
 }
