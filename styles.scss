@@ -16,9 +16,6 @@
   /* Light Theme */
   --Very-Light-Gray: hsl(0, 0%, 98%);
   --Very-Light-Grayish-Blue: hsl(236, 33%, 92%);
-  --light-Grayish-Blue: hsl(233, 11%, 84%);
-  --Dark-Grayish-Blue: hsl(236, 9%, 61%);
-  --Very-Dark-Grayish-Blue: hsl(235, 19%, 35%);
   /* Dark Theme */
   --Very-Dark-Blue: hsl(235, 21%, 11%);
   --Very-Dark-Desaturated-Blue: hsl(235, 24%, 19%);
@@ -27,6 +24,12 @@
   --Dark-Grayish-Blue: rgb(119, 122, 146);
   --Medium-Dark-Grayish-Blue: rgb(72, 75, 106);
   --Very-Dark-Grayish-Blue: rgb(57, 58, 76);
+  // Customs Variable
+  --color-bg: var(--Very-Light-Grayish-Blue);
+  --color-bg-task: var(--Very-Light-Gray);
+  --color-text: var(--Very-Dark-Desaturated-Blue);
+  --color-border: var(--Light-Grayish-Blue);
+  --color-filters-hover: var(--Medium-Dark-Grayish-Blue);
 }
 
 * {
@@ -52,7 +55,16 @@ body {
   background-image: url("../images/bg-desktop-light.jpg");
   background-repeat: no-repeat;
   background-size: contain;
-  background-color: var(--Very-Light-Grayish-Blue);
+  background-color: var(--color-bg);
+  transition: background var(--timing-animation);
+  &--isDark {
+    --color-bg: var(--Very-Dark-Blue);
+    --color-bg-task: var(--Very-Dark-Desaturated-Blue);
+    --color-text: var(--Very-Light-Grayish-Blue);
+    --color-border: hsla(235, 32%, 92%, 0.15);
+    --color-filters-hover: var(--Light-Grayish-Blue);
+    background-image: url(../images/bg-desktop-dark.jpg);
+  }
 }
 
 .app__wrapper {
@@ -67,15 +79,11 @@ body {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  width: 2.6rem;
+  width: 3rem;
   transition: all var(--timing-animation);
 
-  &__moonImg {
+  &__img {
     width: 100%;
-  }
-
-  &:hover {
-    width: 3rem;
   }
 }
 
@@ -94,7 +102,7 @@ body {
     font-size: 3.6rem;
     text-transform: uppercase;
     letter-spacing: 1rem;
-    font-weight: 600;
+    font-weight: var(--font-weight-bold);
   }
 
   &__addContent {
@@ -102,7 +110,7 @@ body {
     height: 6.4rem;
     border-radius: 0.5rem;
     padding: var(--default-padding);
-    background-color: var(--Very-Light-Gray);
+    background-color: var(--color-bg-task);
     position: relative;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 24px 64px -22px;
   }
@@ -119,7 +127,6 @@ body {
     left: 10%;
     font-size: 2.5rem;
     color: var(--Bright-Blue);
-    transition: var(--timing-animation);
     &:hover {
       transform: scale(1.2);
     }
@@ -131,7 +138,7 @@ body {
     flex: 1;
     font-size: var(--font-size-large);
     background-color: transparent;
-    color: var(--Very-Dark-Desaturated-Blue);
+    color: var(--color-text);
     font-family: "Josefin Sans", sans-serif;
     outline: none;
     caret-color: var(--Bright-Blue);
@@ -141,9 +148,8 @@ body {
 .taskList {
   @include flex(column);
   border-radius: 0.5rem;
-  background-color: var(--Very-Light-Gray);
+  background-color: var(--color-bg-task);
   box-shadow: rgba(0, 0, 0, 0.2) 0px 24px 64px -22px;
-  position: relative;
 
   &__list {
     list-style: none;
@@ -155,7 +161,7 @@ body {
     position: relative;
     padding: var(--default-padding);
     cursor: pointer;
-    border-bottom: 0.1rem solid var(--Very-Light-Grayish-Blue);
+    border-bottom: 0.1rem solid var(--color-border);
 
     &:hover {
       .taskList__deleteIcon {
@@ -185,8 +191,8 @@ body {
     &::before {
       opacity: 1;
       background-image: linear-gradient(
-        var(--Light-Grayish-Blue),
-        var(--Light-Grayish-Blue)
+        var(--color-border),
+        var(--color-border)
       );
     }
     &::after {
@@ -205,7 +211,7 @@ body {
 
     &--isCompleted {
       .taskList__value {
-        color: var(--Light-Grayish-Blue);
+        color: var(--color-text);
         text-decoration-line: line-through;
       }
 
@@ -241,16 +247,13 @@ body {
   }
 
   &__value {
-    color: var(--Medium-Dark-Grayish-Blue);
+    color: var(--color-text);
   }
 
   &__deleteIcon {
+    width: 2.8rem;
     opacity: 0;
     transition: all var(--timing-animation);
-
-    &:hover {
-      transform: scale(1.2);
-    }
   }
 }
 
@@ -275,7 +278,7 @@ body {
     cursor: pointer;
 
     &:hover {
-      color: var(--Medium-Dark-Grayish-Blue);
+      color: var(--color-filters-hover);
     }
   }
 
@@ -296,12 +299,12 @@ body {
   text-align: center;
   font-size: var(--font-size-Large);
   color: var(--Dark-Grayish-Blue);
-  border: 0.1rem solid var(--Very-Light-Grayish-Blue);
+  border-bottom: 0.1rem solid var(--color-border);
 }
 
 .dragging {
   opacity: 0.6;
-  background-color: var(--Very-Light-Grayish-Blue);
+  background-color: var(--color-border);
 }
 
 .dragging :where(.taskList__valueContent, button) {
@@ -309,23 +312,23 @@ body {
 }
 
 .dragDropMessage {
+  margin-top: 2rem;
   opacity: 1;
   transition: 2s;
-  position: absolute;
   font-size: var(--font-size-small);
   color: var(--Dark-Grayish-Blue);
-  bottom: -7rem;
-  left: 50%;
-  transform: translatex(-55%);
+  text-align: center;
+  transform: translatex(-2%);
+
+  &.hide {
+    opacity: 0;
+  }
 }
 
-.dragDropMessage.hide {
-  opacity: 0;
-}
-
-@media (max-width: 900px) {
-  .app {
-    background-size: 140rem;
+@media (max-width: 1025px) {
+  .taskList__deleteIcon {
+    opacity: 1;
+    width: 2.5rem;
   }
 }
 
@@ -337,19 +340,27 @@ body {
 }
 
 @media (max-width: 500px) {
+  .app {
+    background-image: url(../images/bg-mobile-light.jpg);
+
+    &--isDark {
+      background-image: url(../images/bg-mobile-dark.jpg);
+    }
+  }
+
   .listOptions__filters {
     position: absolute;
     top: 140%;
     left: 0;
     border-radius: 0.5rem;
-    background-color: var(--Very-Light-Gray);
+    background-color: var(--color-bg-task);
     width: 100%;
     justify-content: center;
     padding: var(--default-padding);
   }
 
-  .dragDropAlarm {
-    bottom: -12rem;
-    transform: translatex(-50%);
+  .dragDropMessage {
+    margin-top: 8rem;
+    transform: none;
   }
 }

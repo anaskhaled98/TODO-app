@@ -1,38 +1,29 @@
-/*
-TODO
-- Toggle
-        [ ] toggleDarkMode
-- Tasks
-        [x] saveToDB
-        [x] fetchData
-        [x] initDataAtStartup
-        [x] initTaskList
-        [x] renderTasklist
-        [x] addTask
-        [x] deleteTask
-        [x] Empty State
-        [x] toggleTask
-        [x] toggleCompletedTasks
-        [x] toggleAllTasks
-        [x] toggleActiveTasks
-        [x] Clear completed
-        [x] Count tasks
-        [x] Drag and Drop
-        [ ] Refactor
-*/
-
 import {
   addBtn,
+  appElement,
   checkBtns,
   clearBtn,
   counterBtn,
+  darkThemeImg,
   deleteBtns,
   dragDropMessage,
   filterBtns,
   inputElement,
   taskList,
   tasks,
+  themeBtn,
 } from './scripts/elements';
+
+const themeToggle = () => {
+  appElement.classList.toggle('app--isDark');
+  if (appElement.classList.contains('app--isDark')) {
+    darkThemeImg.src = './images/icon-sun.svg';
+    saveToDB('themeMode', 'Dark');
+  } else {
+    darkThemeImg.src = './images/icon-moon.svg';
+    saveToDB('themeMode', 'Light');
+  }
+};
 
 const addTask = (e) => {
   e.preventDefault();
@@ -82,7 +73,7 @@ const renderTasklist = (tasks) => {
             <div class="taskList__valueContent">
               <p class="taskList__value">${task.value}</p>
               <img
-                src="./images/icon-cross.svg"
+                src="./images/icon-basket.svg"
                 alt="basket-icon"
                 class="taskList__deleteIcon"
               />
@@ -103,6 +94,8 @@ const saveToDB = (key, data) => {
 };
 
 const initDataAtStartup = () => {
+  (fetchData('themeMode') === 'Dark') && themeToggle();
+
   initTaskList(fetchData('tasks'));
   countingTasks();
 };
@@ -189,7 +182,7 @@ const initTaskListener = () => {
 };
 
 addBtn.addEventListener('click', addTask);
-
 clearBtn.addEventListener('click', clearCompletedTasks);
+themeBtn.addEventListener('click', themeToggle);
 
 initDataAtStartup();

@@ -14,9 +14,6 @@
   /* Light Theme */
   --Very-Light-Gray: hsl(0, 0%, 98%);
   --Very-Light-Grayish-Blue: hsl(236, 33%, 92%);
-  --light-Grayish-Blue: hsl(233, 11%, 84%);
-  --Dark-Grayish-Blue: hsl(236, 9%, 61%);
-  --Very-Dark-Grayish-Blue: hsl(235, 19%, 35%);
   /* Dark Theme */
   --Very-Dark-Blue: hsl(235, 21%, 11%);
   --Very-Dark-Desaturated-Blue: hsl(235, 24%, 19%);
@@ -25,6 +22,11 @@
   --Dark-Grayish-Blue: rgb(119, 122, 146);
   --Medium-Dark-Grayish-Blue: rgb(72, 75, 106);
   --Very-Dark-Grayish-Blue: rgb(57, 58, 76);
+  --color-bg: var(--Very-Light-Grayish-Blue);
+  --color-bg-task: var(--Very-Light-Gray);
+  --color-text: var(--Very-Dark-Desaturated-Blue);
+  --color-border: var(--Light-Grayish-Blue);
+  --color-filters-hover: var(--Medium-Dark-Grayish-Blue);
 }
 
 * {
@@ -50,7 +52,16 @@ body {
   background-image: url("../images/bg-desktop-light.jpg");
   background-repeat: no-repeat;
   background-size: contain;
-  background-color: var(--Very-Light-Grayish-Blue);
+  background-color: var(--color-bg);
+  transition: background var(--timing-animation);
+}
+.app--isDark {
+  --color-bg: var(--Very-Dark-Blue);
+  --color-bg-task: var(--Very-Dark-Desaturated-Blue);
+  --color-text: var(--Very-Light-Grayish-Blue);
+  --color-border: hsla(235, 32%, 92%, 0.15);
+  --color-filters-hover: var(--Light-Grayish-Blue);
+  background-image: url(../images/bg-desktop-dark.jpg);
 }
 
 .app__wrapper {
@@ -67,14 +78,11 @@ body {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  width: 2.6rem;
+  width: 3rem;
   transition: all var(--timing-animation);
 }
-.DarkThemeIcone__moonImg {
+.DarkThemeIcone__img {
   width: 100%;
-}
-.DarkThemeIcone:hover {
-  width: 3rem;
 }
 
 .addTask {
@@ -93,7 +101,7 @@ body {
   font-size: 3.6rem;
   text-transform: uppercase;
   letter-spacing: 1rem;
-  font-weight: 600;
+  font-weight: var(--font-weight-bold);
 }
 .addTask__addContent {
   display: flex;
@@ -103,7 +111,7 @@ body {
   height: 6.4rem;
   border-radius: 0.5rem;
   padding: var(--default-padding);
-  background-color: var(--Very-Light-Gray);
+  background-color: var(--color-bg-task);
   position: relative;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 24px 64px -22px;
 }
@@ -113,7 +121,7 @@ body {
   height: 2.5rem;
   border-radius: 50%;
   border: none;
-  background-color: var(--Very-Light-Gray);
+  background-color: var(--color-bg-task);
   cursor: pointer;
   position: relative;
   z-index: 1;
@@ -124,7 +132,6 @@ body {
   left: 10%;
   font-size: 2.5rem;
   color: var(--Bright-Blue);
-  transition: var(--timing-animation);
 }
 .addTask__buttonImg:hover {
   transform: scale(1.2);
@@ -135,7 +142,7 @@ body {
   flex: 1;
   font-size: var(--font-size-large);
   background-color: transparent;
-  color: var(--Very-Dark-Desaturated-Blue);
+  color: var(--color-text);
   font-family: "Josefin Sans", sans-serif;
   outline: none;
   caret-color: var(--Bright-Blue);
@@ -146,9 +153,8 @@ body {
   flex-direction: column;
   gap: 0;
   border-radius: 0.5rem;
-  background-color: var(--Very-Light-Gray);
+  background-color: var(--color-bg-task);
   box-shadow: rgba(0, 0, 0, 0.2) 0px 24px 64px -22px;
-  position: relative;
 }
 .taskList__list {
   list-style: none;
@@ -162,7 +168,7 @@ body {
   position: relative;
   padding: var(--default-padding);
   cursor: pointer;
-  border-bottom: 0.1rem solid var(--Very-Light-Grayish-Blue);
+  border-bottom: 0.1rem solid var(--color-border);
 }
 .taskList__taskContent:hover .taskList__deleteIcon {
   opacity: 1;
@@ -185,7 +191,7 @@ body {
 }
 .taskList__taskContent::before {
   opacity: 1;
-  background-image: linear-gradient(var(--Light-Grayish-Blue), var(--Light-Grayish-Blue));
+  background-image: linear-gradient(var(--color-border), var(--color-border));
 }
 .taskList__taskContent::after {
   opacity: 0;
@@ -195,7 +201,7 @@ body {
   display: none;
 }
 .taskList__taskContent--isCompleted .taskList__value {
-  color: var(--Light-Grayish-Blue);
+  color: var(--color-text);
   text-decoration-line: line-through;
 }
 .taskList__list--hideCompleted .taskList__taskContent--isCompleted {
@@ -213,7 +219,7 @@ body {
   height: 2.5rem;
   border-radius: 50%;
   border: none;
-  background-color: var(--Very-Light-Gray);
+  background-color: var(--color-bg-task);
   cursor: pointer;
   position: relative;
   z-index: 1;
@@ -230,14 +236,12 @@ body {
   flex: 1;
 }
 .taskList__value {
-  color: var(--Medium-Dark-Grayish-Blue);
+  color: var(--color-text);
 }
 .taskList__deleteIcon {
+  width: 2.8rem;
   opacity: 0;
   transition: all var(--timing-animation);
-}
-.taskList__deleteIcon:hover {
-  transform: scale(1.2);
 }
 
 .listOptions {
@@ -271,7 +275,7 @@ body {
   cursor: pointer;
 }
 .listOptions__filter:hover, .listOptions__deleteButton:hover {
-  color: var(--Medium-Dark-Grayish-Blue);
+  color: var(--color-filters-hover);
 }
 .listOptions__deleteButton {
   font-weight: var(--font-weight-regular);
@@ -289,12 +293,12 @@ body {
   text-align: center;
   font-size: var(--font-size-Large);
   color: var(--Dark-Grayish-Blue);
-  border: 0.1rem solid var(--Very-Light-Grayish-Blue);
+  border-bottom: 0.1rem solid var(--color-border);
 }
 
 .dragging {
   opacity: 0.6;
-  background-color: var(--Very-Light-Grayish-Blue);
+  background-color: var(--color-border);
 }
 
 .dragging :where(.taskList__valueContent, button) {
@@ -302,23 +306,22 @@ body {
 }
 
 .dragDropMessage {
+  margin-top: 2rem;
   opacity: 1;
   transition: 2s;
-  position: absolute;
   font-size: var(--font-size-small);
   color: var(--Dark-Grayish-Blue);
-  bottom: -7rem;
-  left: 50%;
-  transform: translatex(-55%);
+  text-align: center;
+  transform: translatex(-2%);
 }
-
 .dragDropMessage.hide {
   opacity: 0;
 }
 
-@media (max-width: 900px) {
-  .app {
-    background-size: 140rem;
+@media (max-width: 1025px) {
+  .taskList__deleteIcon {
+    opacity: 1;
+    width: 2.5rem;
   }
 }
 @media (max-width: 650px) {
@@ -328,18 +331,24 @@ body {
   }
 }
 @media (max-width: 500px) {
+  .app {
+    background-image: url(../images/bg-mobile-light.jpg);
+  }
+  .app--isDark {
+    background-image: url(../images/bg-mobile-dark.jpg);
+  }
   .listOptions__filters {
     position: absolute;
     top: 140%;
     left: 0;
     border-radius: 0.5rem;
-    background-color: var(--Very-Light-Gray);
+    background-color: var(--color-bg-task);
     width: 100%;
     justify-content: center;
     padding: var(--default-padding);
   }
-  .dragDropAlarm {
-    bottom: -12rem;
-    transform: translatex(-50%);
+  .dragDropMessage {
+    margin-top: 8rem;
+    transform: none;
   }
 }/*# sourceMappingURL=styles.css.map */
