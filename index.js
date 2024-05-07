@@ -17,7 +17,7 @@ import {
 const themeToggle = () => {
   appElement.classList.toggle('app--isDark');
   if (appElement.classList.contains('app--isDark')) {
-    darkThemeImg.classList = 'fa-regular fa-sun DarkThemeIcone__img';
+    darkThemeImg.classList = 'fa-solid fa-sun DarkThemeIcone__img';
     saveToDB('themeMode', 'Dark');
   } else {
     darkThemeImg.classList = 'fa-solid fa-moon DarkThemeIcone__img';

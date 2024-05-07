@@ -78,11 +78,11 @@ body {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  width: 3rem;
   transition: all var(--timing-animation);
 }
 .DarkThemeIcone__img {
-  width: 100%;
+  font-size: 3rem;
+  color: white;
 }
 
 .addTask {
