@@ -84,6 +84,7 @@ body {
   &__img {
     font-size: 3rem;
     color: white;
+    margin-right: 5px;
   }
 }
 
@@ -239,6 +240,8 @@ body {
 
   &__checkboxImg {
     opacity: 0;
+    color: var(--Very-Light-Gray);
+    font-size: 15px;
   }
 
   &__valueContent {
@@ -251,9 +254,11 @@ body {
   }
 
   &__deleteIcon {
-    width: 2.8rem;
+    text-align: center;
     opacity: 0;
     transition: all var(--timing-animation);
+    color: #ff2d2d;
+    font-size: 2rem;
   }
 }
 
@@ -328,7 +333,7 @@ body {
 @media (max-width: 1025px) {
   .taskList__deleteIcon {
     opacity: 1;
-    width: 2.5rem;
+    margin-right: 1rem;
   }
 }
 

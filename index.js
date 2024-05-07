@@ -62,21 +62,13 @@ const renderTasklist = (tasks) => {
           draggable = "true"
           >
             <button class="taskList__checkbox">
-              <img
-                src="./images/icon-check.svg"
-                alt="check-icon"
-                class="taskList__checkboxImg"
-              />
+            <i class="fa-solid fa-check taskList__checkboxImg"></i>
 
             
             </button>
             <div class="taskList__valueContent">
               <p class="taskList__value">${task.value}</p>
-              <img
-                src="./images/icon-basket.svg"
-                alt="basket-icon"
-                class="taskList__deleteIcon"
-              />
+              <i class="fa-solid fa-trash taskList__deleteIcon"></i>
             </div>
         `;
   });
