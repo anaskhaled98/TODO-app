@@ -15,13 +15,14 @@ The user will enter a task and the program will execute it in a list.
 - Drag and drop feature.
 
 ## Validations 
-- If input field is empty, the user can't add tasks.
+- If the input field is empty, the user can't add tasks.
 - To activate drag and drop feature tasks must be two or more.
 
 ## Technologies 
 1. HTML and CSS.
 2. SASS.
 3. JavaScript modules.
+4. Vite for bunlding.
 
 ## Demo 
 https://todo-app-two-zeta-79.vercel.app/
